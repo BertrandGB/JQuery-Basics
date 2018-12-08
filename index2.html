@@ -1,0 +1,66 @@
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>jQuery tester</title>
+    </head>
+
+    <body>
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" id="employee">Get Record</button>
+        </span>
+         <table id="content" border="2">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>question</th>
+                    <th>course</th>
+                    <th>answerEntities</th>
+                    <th>AnswerId</th>
+                    <th>Ans</th>
+                    <th>status</th>
+                </tr>
+            </thead>
+            <tbody id="emp">
+            </tbody>
+        </table>
+    </body>
+
+    <script type="text/javascript">
+    $(document).ready(
+        function() {
+            alert("1");
+            var data = $("#employee").val();
+            alert("2");
+            $.ajax({
+
+                url : 'http://localhost:8080/online/fecthcourse',
+                type : 'GET',
+                dataType : 'JSON',
+                success : function(data) {
+                    alert("3");
+                    $(data).each(
+                            function() {
+                                $('#tbody').append(
+                                        '<tr><td>' + this.id
+                                                + '</td><td>'
+                                                + this.question
+                                                + '</td><td>'
+                                                + this.course
+                                                + '</td><td>'
+                                                + this.answerEntities
+                                                + '</td><td>'
+                                                + this.ans
+                                                + '</td><td>'
+                                                + this.status
+                                                + '</td></tr>')
+                            });
+                },
+                error : function(data) {
+                    alert("4");
+                }
+
+            });
+        });
+    </script>
+</html>
